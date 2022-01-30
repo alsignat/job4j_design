@@ -17,7 +17,7 @@ public class FlatMapTest {
                 List.of(2, 3).iterator()
         ).iterator();
         FlatMap<Integer> flat = new FlatMap<>(data);
-        assertEquals(flat.next().intValue(),1);
+        assertEquals(flat.next().intValue(), 1);
         assertEquals(flat.next().intValue(), 2);
         assertEquals(flat.next().intValue(), 3);
     }
