@@ -32,8 +32,7 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     private int grow() {
-        size = size == 0 ? 10 : size * 2;
-        return size();
+        return size == 0 ? 10 : size * 2;
     }
 
     /**
