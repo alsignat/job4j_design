@@ -71,15 +71,15 @@ public class SimpleLinkedList<E> implements ListLinked<E> {
      */
     @Override
     public E get(int index) {
-        int dest = Objects.checkIndex(index, size);
+        Objects.checkIndex(index, size);
         boolean reverseDirection = index >= size / 2;
         Node<E> node = reverseDirection ? last : first;
         if (!reverseDirection) {
-            for (int i = 0; i < dest; i++) {
+            for (int i = 0; i < index; i++) {
                 node = node.getRight();
             }
         } else {
-            for (int i = size - 1; i > dest; i--) {
+            for (int i = size - 1; i > index; i--) {
                 node = node.getLeft();
             }
         }
@@ -95,7 +95,7 @@ public class SimpleLinkedList<E> implements ListLinked<E> {
         return new Iterator<E>() {
 
             private final int expectedModCount = modCount;
-            private int pointer;
+
             private Node<E> current = first;
 
             @Override
@@ -103,7 +103,7 @@ public class SimpleLinkedList<E> implements ListLinked<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return pointer < size;
+                return current != last;
             }
 
             @Override
@@ -113,7 +113,6 @@ public class SimpleLinkedList<E> implements ListLinked<E> {
                 }
                 E value = current.getValue();
                 current = current.getRight();
-                pointer++;
                 return value;
             }
         };
