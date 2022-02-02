@@ -23,7 +23,8 @@ public class SimpleSet<T> implements Set<T> {
         boolean rsl = false;
         for (T el : set) {
             if (Objects.equals(el, value)) {
-                return true;
+                rsl = true;
+                break;
             }
         }
         return rsl;
