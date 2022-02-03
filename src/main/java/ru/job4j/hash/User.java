@@ -47,19 +47,40 @@ public class User {
         this.birthday = birthday;
     }
 
-    @SuppressWarnings("checkstyle:EqualsHashCode")
+
+    /*
     @Override
     public int hashCode() {
         return name.hashCode() * 5
                 + childrenCount
                 + birthday.hashCode() * 11;
     }
+    */
+
+    @SuppressWarnings("checkstyle:EqualsHashCode")
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof User)) {
+            return false;
+        }
+
+        User another = (User) o;
+
+        return this.birthday.equals(another.getBirthday())
+                && this.childrenCount == another.getChildrenCount()
+                && this.name.equals(another.getName());
+    }
 
     public static void main(String[] args) {
         Calendar birthday = new GregorianCalendar(1980, Calendar.JULY, 31);
         User userOne = new User("Harry Potter", 2, birthday);
         User userTwo = new User("Harry Potter", 2, birthday);
-        Map<User, Object> map = new HashMap<>(Map.of(userOne, new Object(), userTwo, new Object()));
+        Object ob = new Object();
+        Map<User, Object> map = new HashMap<>(Map.of(userOne, ob, userTwo, ob));
         System.out.println(map);
         int indexOne = userOne.hashCode() & 15;
         int indexTwo = userTwo.hashCode() & 15;
