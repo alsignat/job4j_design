@@ -2,6 +2,8 @@ package ru.job4j.hash;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
 
@@ -43,6 +45,17 @@ public class User {
 
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
+    }
+
+    public static void main(String[] args) {
+        User userOne = new User("Harry Potter", 2, new GregorianCalendar(1980, Calendar.JULY, 31));
+        User userTwo = new User("Harry Potter", 2, new GregorianCalendar(1980, Calendar.JULY, 31));
+        Map<User, Object> map = new HashMap<>(Map.of(userOne, new Object(), userTwo, new Object()));
+        System.out.println(map);
+        int indexOne = map.get(userOne).hashCode() & 15;
+        int indexTwo = map.get(userTwo).hashCode() & 15;
+        System.out.println("bucket index of (userOne, obj1): " + indexOne);
+        System.out.println("bucket index of (userTwo, obj1): " + indexTwo);
     }
 
 }
