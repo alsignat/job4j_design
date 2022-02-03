@@ -47,17 +47,13 @@ public class User {
         this.birthday = birthday;
     }
 
-
-    /*
     @Override
     public int hashCode() {
         return name.hashCode() * 5
                 + childrenCount
                 + birthday.hashCode() * 11;
     }
-    */
 
-    @SuppressWarnings("checkstyle:EqualsHashCode")
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -80,12 +76,10 @@ public class User {
         User userOne = new User("Harry Potter", 2, birthday);
         User userTwo = new User("Harry Potter", 2, birthday);
         Object ob = new Object();
-        Map<User, Object> map = new HashMap<>(Map.of(userOne, ob, userTwo, ob));
+        Map<User, Object> map = new HashMap<>();
+        map.put(userOne, ob);
+        map.put(userTwo, ob);
         System.out.println(map);
-        int indexOne = userOne.hashCode() & 15;
-        int indexTwo = userTwo.hashCode() & 15;
-        System.out.println("bucket index of (userOne, obj1): " + indexOne);
-        System.out.println("bucket index of (userTwo, obj2): " + indexTwo);
     }
 
 }
