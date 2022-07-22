@@ -1,8 +1,6 @@
 package ru.job4j.io;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -17,11 +15,21 @@ public class Config {
     }
 
     public void load() {
-        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path));
+        PrintWriter log = new PrintWriter(new BufferedWriter(new FileWriter("./data/errors_log.txt")))) {
             read.lines().filter(ln -> !ln.trim().startsWith("#") && !ln.isBlank())
                         .forEach(ln -> {
                         String[] pair = ln.split("=", 2);
-                        values.put(pair[0], pair[1]);
+                        try {
+                            if (pair.length != 2 || pair[0].isBlank() || pair[1].isBlank()) {
+                                throw new IllegalArgumentException();
+                            } else {
+                                values.put(pair[0], pair[1]);
+                            }
+                        } catch (IllegalArgumentException e) {
+                            log.print("Broken line: ");
+                            log.println(ln);
+                        }
                     }
             );
         } catch (IOException e) {

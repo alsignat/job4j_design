@@ -1,0 +1,4 @@
+Broken line: =value
+Broken line: key=
+Broken line: valuekey
+Broken line: =
