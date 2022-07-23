@@ -9,7 +9,7 @@ public class Analyzer {
              PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(target)))) {
             boolean unavailableNow = false;
             String ln;
-            while ((ln = in.readLine()) != null) {
+            while ((ln = in.readLine()) != null && !ln.isBlank()) {
                 String[] data = ln.split(" ");
                 int status = Integer.parseInt(data[0]);
                 String time = data[1];
