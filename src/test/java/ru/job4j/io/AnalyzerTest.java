@@ -14,15 +14,15 @@ class AnalyzerTest {
         Analyzer analyzer = new Analyzer();
         File source = tempDir.resolve("source.txt").toFile();
         try (PrintWriter out = new PrintWriter(source)) {
-            out.println
-                    ("""
+            String data = """
                     200 10:56:01
                     500 10:57:01
                     400 10:58:01
                     200 10:59:01
                     500 11:01:02
                     200 11:02:02
-                    """);
+                    """;
+            out.println(data);
         }
         File target  = tempDir.resolve("target.txt").toFile();
         analyzer.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
@@ -43,15 +43,15 @@ class AnalyzerTest {
         Analyzer analyzer = new Analyzer();
         File source = tempDir.resolve("source.txt").toFile();
         try (PrintWriter out = new PrintWriter(source)) {
-            out.println
-                    ("""
+            String data = """
                     400 10:56:01
                     500 10:57:01
                     400 10:58:01
                     200 10:59:01
                     500 11:01:02
                     200 11:02:02
-                    """);
+                    """;
+            out.println(data);
         }
         File target  = tempDir.resolve("target.txt").toFile();
         analyzer.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
@@ -66,5 +66,4 @@ class AnalyzerTest {
                 """.replace("\n", System.lineSeparator());
         Assertions.assertEquals(expected, rsl.toString());
     }
-
 }
