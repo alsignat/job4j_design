@@ -1,0 +1,19 @@
+user: Привет
+bot: I agree with you!
+
+user: Что как
+bot: Ясно.
+
+user: сто
+bot: I agree with you!
+
+user: стоп
+user: ну,
+user: ок
+user: продолжить
+bot: Понятно.
+
+user: Все, пока
+bot: Ясно.
+
+user: закончить
