@@ -2,7 +2,6 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -45,14 +44,15 @@ public class Zip {
         if (inputArgs.get("d") == null || inputArgs.get("e") == null || inputArgs.get("o") == null) {
             throw new IllegalArgumentException("Correct input: -d=path -e=extensionToExclude -o=outputFile");
         }
-        try {
-            Path folder = Path.of(inputArgs.get("d"));
-            if (!Files.isDirectory(folder)) {
-                throw new IllegalArgumentException("Error. Directory does not exist.");
-            }
-        } catch (InvalidPathException e) {
-                throw new IllegalArgumentException("Error. Directory does not exist.");
-            }
+        if (!inputArgs.get("e").matches("/\\.[^.]*$/")) {
+            throw new IllegalArgumentException("Incorrect file extension: must start with dot");
+        }
+        if (!inputArgs.get("o").toLowerCase().endsWith(".zip")) {
+            throw new IllegalArgumentException("Incorrect output file: must have .zip extension.");
+        }
+        if (!Files.isDirectory(Path.of(inputArgs.get("d")))) {
+            throw new IllegalArgumentException("Error. Directory does not exist.");
+        }
         return inputArgs;
     }
 
