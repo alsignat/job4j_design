@@ -11,6 +11,10 @@ public class ArgsName {
         return values.get(key);
     }
 
+    public int size() {
+        return values.size();
+    }
+
     private void parse(String[] args) {
         for (String arg : args) {
             String[] entry = validate(arg);
@@ -34,6 +38,11 @@ public class ArgsName {
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
+    }
+
+    @Override
+    public String toString() {
+        return values.toString();
     }
 
     public static void main(String[] args) {
