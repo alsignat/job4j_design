@@ -27,14 +27,16 @@ public class ArgsName {
             throw new IllegalArgumentException("Invalid input. Correct input: -key=value");
         }
         String[] entry = arg.split("=", 2);
-        if (entry.length < 2 || entry[0].length() < 2
-                || entry[0].isBlank() || entry[1].isBlank()) {
+        if (entry.length < 2 || entry[0].length() < 2 || entry[1].isBlank()) {
             throw new IllegalArgumentException("Invalid input. Correct input: -key=value");
         }
         return new String[] {entry[0].substring(1), entry[1]};
     }
 
     public static ArgsName of(String[] args) {
+        if (args == null || args.length == 0) {
+            throw new IllegalArgumentException("Args parameter can not be null or empty.");
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
